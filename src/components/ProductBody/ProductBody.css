@@ -1,0 +1,10 @@
+.product-body {
+	border: 1px solid black;
+	height: 600px;
+	padding: 0;
+	width: 60%;
+}
+
+.product-body-header {
+	width: fit-content;
+}
