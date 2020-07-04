@@ -2,10 +2,13 @@ import React from 'react';
 
 import './ProductNav.css';
 
-const ProductNav = React.memo(({handleState}) => {
+const ProductNav = React.memo(({ handleState }) => {
 	console.log(`navigation rendered`);
 	const productValues = [
-		{ id: 0, value: 'vacuums', name: 'Vacuums' },
+		{ id: 0, value: 'uprightVacuums', name: 'Upright Vacuums' },
+		{ id: 0, value: 'canisterVacuums', name: 'Canister Vacuums' },
+		{ id: 0, value: 'backpackVacuums', name: 'Backpack Vacuums' },
+		{ id: 0, value: 'extraWideVacuums', name: 'Extra Wide Vacuums' },
 		{ id: 1, value: 'powerSweepers', name: 'Power Sweepers' },
 		{ id: 2, value: 'extractors', name: 'Extractors' },
 		{ id: 3, value: 'floorMachines', name: 'Floor Machines' },
@@ -14,7 +17,7 @@ const ProductNav = React.memo(({handleState}) => {
 		{ id: 6, value: 'cleaning', name: 'Cleaning formula / Accessories' },
 	];
 	const [activeBtn, setActiveBtn] = React.useState(null);
-	
+
 	return (
 		<div className="product-navigator">
 			<ul className="equipment-navigation">
@@ -31,7 +34,7 @@ const ProductNav = React.memo(({handleState}) => {
 									}`}
 									value={button.value}
 									onClick={() => {
-										const passingValue = button.value
+										const passingValue = button.value;
 										setActiveBtn(index);
 										handleState(passingValue);
 									}}

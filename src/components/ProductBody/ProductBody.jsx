@@ -18,8 +18,7 @@ const ProductBody = React.memo(({ state }) => {
 	// console.log(typeof category);
 	//console.log(`${JSON.stringify(bissell[category])}`);
 	return (
-		<div className="product-boy">
-			<h1 className="product-body-header">Vacuums</h1>
+		<div className="product-body">
 			<Products data={bissell[category]} />
 		</div>
 	);
