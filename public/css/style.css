@@ -368,6 +368,9 @@ header .intro-text {
 #equipment {
 	padding: 120px 0;
 }
+#equipment .equipment-container {
+	width: 90%;
+}
 
 
 /* Testimonials Section
