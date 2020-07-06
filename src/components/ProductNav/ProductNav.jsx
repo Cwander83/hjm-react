@@ -19,10 +19,10 @@ const ProductNav = React.memo(({ handleState }) => {
 	const [activeBtn, setActiveBtn] = React.useState(null);
 
 	return (
-		<div className="product-navigator">
-			<ul className="equipment-navigation">
+		<div className='product-navigator'>
+			<ul className='equipment-navigation'>
 				<li>
-					<h2 className="equipment-nav-header">Products</h2>
+					<h2 className='equipment-nav-header'>Products</h2>
 				</li>
 				{productValues &&
 					productValues.map((button, index) => {
@@ -44,6 +44,9 @@ const ProductNav = React.memo(({ handleState }) => {
 							</li>
 						);
 					})}
+				<li className="products-nav-form-section">
+					<h2 className='cart'>products to purchase:</h2>
+				</li>
 			</ul>
 		</div>
 	);
