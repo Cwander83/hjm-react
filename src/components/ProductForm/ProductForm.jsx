@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
 import './ProductForm.css';
 
-const ProductForm = ({model}) => {
-	const [modalState, setModalState]= useState()
-	/* NEW: Input state handling vvvv */
+const ProductForm = React.memo(({ model }) => {
+	const { register, handleSubmit, errors } = useForm();
+
 	const [inputs, setInputs] = useState({
 		name: '',
 		phone: '',
 		email: '',
-		model: '',
-		message: ''
+		model: model,
+		message: '',
 	});
 
-	useEffect(() => {
-		setModalState()
-	}, [input])
+	console.log(`inputs: ${inputs.model}`);
 	const handleOnChange = (event) => {
 		event.persist();
 		setInputs((prev) => ({
@@ -41,17 +40,17 @@ const ProductForm = ({model}) => {
 				name: '',
 				phone: '',
 				email: '',
-				model: '',
+				model: model,
 				message: '',
 			});
 		}
 	};
 	const handleOnSubmit = (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 		setServerState({ submitting: true });
 		axios({
 			method: 'POST',
-			url: 'https://formspree.io/YOUR_EMAIL_HERE',
+			url: 'https://formspree.io/chriswandermail@gmail.com',
 			data: inputs,
 		})
 			.then((r) => {
@@ -63,54 +62,93 @@ const ProductForm = ({model}) => {
 	};
 
 	return (
-		<div>
-			<h1>Contact Us</h1>
-			<form onSubmit={handleOnSubmit}>
-				<label htmlFor='name'>name:</label>
-				<input
-					id='name'
-					type='name'
-					name='name'
-					required
-					onChange={handleOnChange}
-					value={inputs.email}
+		<div className="form-container">
+			<div className="form-col-1">
+				<h3>thank you for your interest in the {model}</h3>
+				<img
+					className="form-product-image"
+					src={require(`./../../images/${model}.jpg`)}
+					alt={model}
 				/>
-				<label htmlFor='email'>Email:</label>
-				<input
-					id='email'
-					type='email'
-					name='email'
-					required
-					onChange={handleOnChange}
-					value={inputs.email}
-				/>
-				<label htmlFor='phone'>phone:</label>
-				<input
-					id='phone'
-					type='phone'
-					name='phone'
-					required
-					onChange={handleOnChange}
-					value={inputs.email}
-				/>
-				<label htmlFor='message'>Message:</label>
-				<textarea
-					id='message'
-					name='message'
-					onChange={handleOnChange}
-					value={inputs.message}
-				></textarea>
-				<button type='submit' disabled={serverState.submitting}>
-					Submit
-				</button>
-				{serverState.status && (
-					<p className={!serverState.status.ok ? 'errorMsg' : ''}>
-						{serverState.status.msg}
-					</p>
-				)}
-			</form>
+			</div>
+			<div className="form-col-2">
+				<h3>send in request and we'll contact you</h3>
+				<form className="product-form" onSubmit={handleSubmit(handleOnSubmit)}>
+					<input
+						id="name"
+						type="text"
+						name="name"
+						onChange={handleOnChange}
+						value={inputs.name}
+						placeholder="name"
+						ref={register({
+							required: 'Required',
+							min: 2,
+							maxLength: 20,
+						})}
+					/>
+					<span className="error-message">
+						{errors.name && errors.name.message}
+					</span>
+
+					<input
+						id="email"
+						type="email"
+						name="email"
+						onChange={handleOnChange}
+						value={inputs.email}
+						placeholder="email"
+						ref={register({
+							required: 'Required',
+							pattern: /^\S+@\S+$/i,
+						})}
+					/>
+					<span className="error-message">
+						{errors.email && errors.email.message}
+					</span>
+
+					<input
+						id="phone"
+						type="phone"
+						name="phone"
+						onChange={handleOnChange}
+						value={inputs.phone}
+						placeholder="phone number"
+						ref={register({
+							required: 'Invalid US Phone Number.',
+							maxLength: 12,
+							pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
+						})}
+					/>
+					<span className="error-message">
+						{errors.phone?.type === 'pattern' &&
+							'Please enter valid US Phone Number.'}
+					</span>
+
+					<input
+						id="message"
+						name="message"
+						onChange={handleOnChange}
+						value={inputs.message}
+						placeholder="message"
+					/>
+					<button
+						className="product-form-btn"
+						type="submit"
+						disabled={serverState.submitting}
+					>
+						Submit
+					</button>
+
+					{serverState.status && (
+						<p className={!serverState.status.ok ? 'errorMsg' : ''}>
+							{serverState.status.msg}
+						</p>
+					)}
+				</form>
+			</div>
 		</div>
 	);
-};
+});
 
 export default ProductForm;
