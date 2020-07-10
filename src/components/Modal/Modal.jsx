@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Modal from 'react-modal';
 
-import ProductFrom from '../ProductForm/ProductForm';
+
 
 import './Modal.css';
 
@@ -23,10 +23,7 @@ import './Modal.css';
 Modal.setAppElement('#ModalElement');
 
 const ProductModal = React.memo(({ open, closeModal, product }) => {
-	const [form, setForm] = useState(false);
-	const [productState, setProduct] = useState();
-
-	const formHandler = () => setForm(!form);
+	
 
 	return (
 		<div>
@@ -40,16 +37,15 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 			>
 				<span
 					className="modal-close-btn"
-					onClick={() => {
-						closeModal();
+					onClick={
+						closeModal
 						// resets the form to false in case user goes back
-						setForm(false);
-					}}
+					}
 				>
 					<i className="far fa-window-close"></i>
 				</span>
 
-				{!form && product ? (
+				{product &&
 					Object.keys(product).map((obj, i) => {
 						let currentProduct = product[obj];
 
@@ -57,7 +53,7 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 							<div className="modal-product-body" key={i}>
 								<div className="product-col-1">
 									<img
-										key={i}
+										key={currentProduct.id}
 										className="modal-product-image"
 										src={require(`./../../images/${currentProduct.model}.jpg`)}
 										alt={currentProduct.model}
@@ -79,8 +75,7 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 									</ul>
 									<button
 										onClick={() => {
-											formHandler();
-											setProduct(currentProduct.model);
+											//addProducts(currentProduct.model);
 										}}
 										className="modal-form-link"
 									>
@@ -90,10 +85,7 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 								</div>
 							</div>
 						);
-					})
-				) : (
-					<ProductFrom model={productState} />
-				)}
+					})}
 			</Modal>
 		</div>
 	);

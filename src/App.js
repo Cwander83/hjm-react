@@ -1,10 +1,11 @@
 import React from 'react';
 
 import ProductNav from './components/ProductNav/ProductNav';
-//import ProductForm from './components/ProductForm/ProductForm';
+
 import ProductBody from './components/ProductBody/ProductBody';
 
 import './App.css';
+import CartContextProvider from './context/cart-provider';
 
 function App() {
 	const [state, setState] = React.useState('uprightVacuums');
@@ -16,11 +17,12 @@ function App() {
 
 	console.log(`state: ${state}`);
 	return (
-		<div className="App">
-			<ProductNav handleState={handleState} />
-			<ProductBody state={state} />
-			{/* <ProductForm /> */}
-		</div>
+		<CartContextProvider>
+			<div className="App">
+				<ProductNav handleState={handleState} />
+				<ProductBody state={state} />
+			</div>
+		</CartContextProvider>
 	);
 }
 
