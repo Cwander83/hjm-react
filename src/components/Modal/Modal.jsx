@@ -2,29 +2,13 @@ import React from 'react';
 
 import Modal from 'react-modal';
 
-
+import { CartConsumer } from '../../context/cart-context';
 
 import './Modal.css';
-
-// const customStyles = {
-// 	content: {
-// 		top: '50%',
-// 		left: '50%',
-// 		right: 'auto',
-// 		bottom: 'auto',
-// 		marginRight: '-50%',
-// 		minWidth: '75%',
-// 		maxWidth: '85%',
-// 		zIndex: '100',
-// 		transform: 'translate(-50%, -50%)',
-// 	},
-// };
 
 Modal.setAppElement('#ModalElement');
 
 const ProductModal = React.memo(({ open, closeModal, product }) => {
-	
-
 	return (
 		<div>
 			<Modal
@@ -60,9 +44,27 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 									/>
 								</div>
 								<div className="product-col-2">
-									<h3 className="modal-product-title">
-										{currentProduct.model}
-									</h3>
+									<div className="modal-product-title">
+										<h3 className="modal-product-title-header">
+											{currentProduct.model}
+										</h3>
+										<CartConsumer>
+											{({ addProducts }) => (
+												<button
+													onClick={() => {
+														closeModal();
+														addProducts(currentProduct.model);
+													}}
+													className="modal-form-link"
+												>
+													<p>
+														<i className="fas fa-cart-plus"></i>
+														ADD TO CART
+													</p>
+												</button>
+											)}
+										</CartConsumer>
+									</div>
 									<ul className="modal-list">
 										<li>
 											<h4 className="modal-list-title">Features</h4>
@@ -73,15 +75,6 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 											</li>
 										))}
 									</ul>
-									<button
-										onClick={() => {
-											//addProducts(currentProduct.model);
-										}}
-										className="modal-form-link"
-									>
-										<i className="fas fa-cart-plus"></i>
-										<p>request price</p>
-									</button>
 								</div>
 							</div>
 						);

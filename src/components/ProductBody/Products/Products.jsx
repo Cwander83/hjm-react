@@ -7,15 +7,13 @@ import Modal from '../..//Modal/Modal';
 
 const Products = React.memo(({ data }) => {
 	const [modalIsOpen, setIsOpen] = React.useState(false);
-	const [form, setForm] = React.useState(false);
-
-	const formHandler = () => setForm(!form);
 
 	const [selectedProduct, setProduct] = React.useState();
 
 	const modalHandler = () => {
 		setIsOpen(!modalIsOpen);
 	};
+	React.useEffect(() => {}, [data, selectedProduct]);
 
 	console.log(`product rendered`);
 
@@ -48,8 +46,6 @@ const Products = React.memo(({ data }) => {
 				open={modalIsOpen}
 				closeModal={modalHandler}
 				product={selectedProduct}
-				formHandler={formHandler}
-				orderForm={form}
 			></Modal>
 		</React.Fragment>
 	);

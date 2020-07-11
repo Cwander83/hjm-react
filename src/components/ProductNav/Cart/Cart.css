@@ -1,0 +1,27 @@
+.nav-cart-li {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+.cart-remove-icon {
+    margin: auto 20px auto 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.cart-model-title {
+	width: 100%;
+	font-size: 18px;
+	font-family: 'Open Sans', sans-serif;
+	text-transform: capitalize;
+	padding: 10px 0 10px 20px;
+	text-align: start;
+	color: black;
+	border: none;
+    letter-spacing: 0.03em;
+    margin: auto 0;
+}

@@ -4,14 +4,18 @@ import axios from 'axios';
 
 import './ProductForm.css';
 
-const ProductForm = React.memo(({ model }) => {
+import { CartContext } from '../../context/cart-context';
+
+const ProductForm = React.memo(() => {
+	const { products } = React.useContext(CartContext);
+
 	const { register, handleSubmit, errors } = useForm();
 
 	const [inputs, setInputs] = useState({
 		name: '',
 		phone: '',
 		email: '',
-		model: model,
+		model: [],
 		message: '',
 	});
 
@@ -40,7 +44,7 @@ const ProductForm = React.memo(({ model }) => {
 				name: '',
 				phone: '',
 				email: '',
-				model: model,
+				model: products,
 				message: '',
 			});
 		}
@@ -61,16 +65,20 @@ const ProductForm = React.memo(({ model }) => {
 			});
 	};
 
+	React.useEffect(() => {
+		return () => {};
+	}, [inputs, serverState, products]);
+
 	return (
 		<div className="form-container">
-			<div className="form-col-1">
+			{/* <div className="form-col-1">
 				<h3>thank you for your interest in the {model}</h3>
 				<img
 					className="form-product-image"
 					src={require(`./../../images/${model}.jpg`)}
 					alt={model}
 				/>
-			</div>
+			</div> */}
 			<div className="form-col-2">
 				<h3>send in request and we'll contact you</h3>
 				<form className="product-form" onSubmit={handleSubmit(handleOnSubmit)}>

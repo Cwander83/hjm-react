@@ -46,8 +46,13 @@
 }
 
 .modal-product-title {
-	margin: 30px 0;
+	display: flex;
+	justify-items: left;
+}
+.modal-product-title-header {
+	width: fit-content;
 	font-size: 30px;
+	margin: auto 30px auto 0;
 }
 
 .modal-list-title {
@@ -70,28 +75,31 @@
 
 .modal-form-link {
 	padding: 0;
-	margin: 0 0 0 auto;
+	height:auto;
 	width: fit-content;
 	text-align: center;
 	display: flex;
 	flex-direction: row;
 	border: none;
+	margin: auto 0;
+	background-color: white;
 }
 .modal-form-link p {
 	width: fit-content;
 	font-weight: bold;
-	font-size: 18px;
-	text-align: center;
+	font-size: 11px;
+	height: auto;
 	color: #076d4d;
 	margin: auto;
-	padding: 6px 12px;
+	padding: 1px 20px 1px 0;
+	background-color: rgb(185, 185, 185);
 }
 .modal-form-link i {
 	background-color: #076d4d;
 	color: white;
-	padding: 10px 24px;
-	font-size: 18px;
-	margin: auto;
+	padding: 10px 20px;
+	font-size: 14px;
+	margin: auto 15px auto 0;
 }
 
 .product-col-1,
