@@ -6,20 +6,28 @@ import bissell from '../../data/bissell.js';
 
 import Products from './Products/Products';
 
-const ProductBody = React.memo(({ state }) => {
-	const [category, setCategory] = React.useState();
+import { CategoryContext } from '../../context/category-context';
+
+import ProductForm from '../ProductForm/ProductForm';
+
+const ProductBody = React.memo(({ visible, closeForm }) => {
+	const { category } = React.useContext(CategoryContext);
+	const [currentCategory, setCurrentCategory] = React.useState();
 
 	React.useEffect(() => {
-		setCategory(state);
-	}, [state]);
-
-	//console.log(`navigation rendered and state is ${category}`);
-
-	// console.log(typeof category);
-	//console.log(`${JSON.stringify(bissell[category])}`);
+		setCurrentCategory(category);
+	}, [category]);
+	console.log(`body visible: ${visible}`);
 	return (
 		<div className="product-body">
-			<Products data={bissell[category]} />
+			{!visible ? (
+				<Products data={bissell[currentCategory]} />
+			) : (
+				<>
+					<button onClick={closeForm}></button>
+					<ProductForm closeForm={closeForm}/>
+				</>
+			)}
 		</div>
 	);
 });

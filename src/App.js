@@ -1,27 +1,29 @@
 import React from 'react';
 
 import ProductNav from './components/ProductNav/ProductNav';
-
 import ProductBody from './components/ProductBody/ProductBody';
 
+//CSS
 import './App.css';
-import CartContextProvider from './context/cart-provider';
+
+// import provider for context
+import CartContextProvider from './context/cart-context';
+import CategoryProvider from './context/category-context';
+
+// custom hook
+import useForm from './hooks/useForm';
 
 function App() {
-	const [state, setState] = React.useState('uprightVacuums');
+	const { visible, handleForm, closeForm } = useForm();
 
-	const handleState = React.useCallback((data) => {
-		console.log('handleState');
-		setState(data);
-	}, []);
-
-	console.log(`state: ${state}`);
 	return (
 		<CartContextProvider>
-			<div className="App">
-				<ProductNav handleState={handleState} />
-				<ProductBody state={state} />
-			</div>
+			<CategoryProvider>
+				<div className="App">
+					<ProductNav handleForm={handleForm} visible={visible} closeForm={closeForm}/>
+					<ProductBody visible={visible} closeForm={closeForm} />
+				</div>
+			</CategoryProvider>
 		</CartContextProvider>
 	);
 }
