@@ -14,14 +14,39 @@
 }
 .product {
     width: 30%;
-    max-width: 600px;
+    max-width: 400px;
 
 	background-color: inherit;
-	margin: 4px;
+	margin: auto 4px 4px 4px;
+	padding: 10px 0 0 0;
 }
 .product-col-1 {
 	width: 25%;
 }
 .product-col-2 {
 	width: 75%;
+}
+
+@media only screen and (max-width: 1440px) {
+	.product-image {
+		max-height: 400px;
+		height: auto;
+		width: auto;
+		max-width: 300px;
+		
+	}
+}
+@media only screen and (max-width: 1024px) {
+	.product-image {
+		
+		max-width: 230px;
+		
+	}
+}
+@media only screen and (max-width: 768px) {
+	.product-image {
+		
+		max-width: 230px;
+		
+	}
 }

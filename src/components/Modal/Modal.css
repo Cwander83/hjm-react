@@ -51,6 +51,7 @@
 }
 .modal-product-title-header {
 	width: fit-content;
+	max-width: 50%;
 	font-size: 30px;
 	margin: auto 30px auto 0;
 }
@@ -71,11 +72,12 @@
 }
 .modal-list li p {
 	margin-bottom: 2px;
+	text-transform: capitalize;
 }
 
 .modal-form-link {
 	padding: 0;
-	height:auto;
+	height: auto;
 	width: fit-content;
 	text-align: center;
 	display: flex;
@@ -113,4 +115,52 @@
 
 .product-col-2 {
 	padding: 0 30px 0 30px;
+}
+
+.modal-form-link-1024 {
+	display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+	.modal-product-title {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.modal-product-title-header {
+		
+		max-width: 80%;
+		
+		margin-bottom: 30px;
+	}
+	.modal-form-link-1024 {
+		padding: 0;
+		height: auto;
+		width: fit-content;
+		text-align: center;
+		display: flex;
+		flex-direction: row;
+		border: none;
+		margin: auto auto auto 30px;
+		background-color: white;
+	}
+	.modal-form-link-1024 p {
+		width: fit-content;
+		font-weight: bold;
+		font-size: 11px;
+		height: auto;
+		color: #076d4d;
+		margin: auto;
+		padding: 1px 20px 1px 0;
+		background-color: rgb(185, 185, 185);
+	}
+	.modal-form-link-1024 i {
+		background-color: #076d4d;
+		color: white;
+		padding: 10px 20px;
+		font-size: 14px;
+		margin: auto 15px auto 0;
+	}
+	.modal-form-link {
+		display: none;
+	}
 }

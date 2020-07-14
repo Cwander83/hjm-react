@@ -37,7 +37,9 @@ const Products = React.memo(({ data }) => {
 								src={require(`../../../images/${data[obj].model}.jpg`)}
 								alt={data[obj].model}
 							/>
-							<p className="product-title">{data[obj].model}</p>
+							<p className="product-title">
+								{!data[obj].name ? data[obj].model : data[obj].name}
+							</p>
 						</div>
 					);
 				})}

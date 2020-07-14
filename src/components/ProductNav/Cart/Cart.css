@@ -25,3 +25,25 @@
     letter-spacing: 0.03em;
     margin: auto 0;
 }
+.cart-empty {
+    text-transform: none;
+}
+
+
+@media only screen and (max-width: 1440px) {
+
+}
+
+@media only screen and (max-width: 1024px) {
+.cart-empty{
+    font-size: 14px;
+}
+}
+@media only screen and (max-width: 768px) {
+.cart-empty{
+    font-size: 14px;
+}
+.cart-model-title{
+    font-size: 14px;
+}
+}

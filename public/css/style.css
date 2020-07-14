@@ -371,6 +371,9 @@ header .intro-text {
 #equipment .equipment-container {
 	width: 90%;
 }
+#equipment h5 {
+	margin-bottom: 40px;
+}
 
 
 /* Testimonials Section
@@ -567,6 +570,7 @@ label {
 /* now hiring  */
 /* Modal button and modal body */
 .hiringBtn {
+	display: none;
 	position: fixed;
 	z-index: 1;
 	right: 0;
