@@ -9,6 +9,7 @@ import Products from './Products/Products';
 import { CategoryContext } from '../../context/category-context';
 
 import ProductForm from '../ProductForm/ProductForm';
+import CartIcon from '../../ui/CartIcon/CartIcon';
 
 const ProductBody = React.memo(({ visible, closeForm }) => {
 	const { category } = React.useContext(CategoryContext);
@@ -17,16 +18,14 @@ const ProductBody = React.memo(({ visible, closeForm }) => {
 	React.useEffect(() => {
 		setCurrentCategory(category);
 	}, [category]);
-	console.log(`body visible: ${visible}`);
+
 	return (
 		<div className="product-body">
+			<CartIcon />
 			{!visible ? (
 				<Products data={bissell[currentCategory]} />
 			) : (
-				<>
-					<button onClick={closeForm}></button>
-					<ProductForm closeForm={closeForm}/>
-				</>
+				<ProductForm closeForm={closeForm} />
 			)}
 		</div>
 	);

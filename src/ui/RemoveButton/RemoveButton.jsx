@@ -7,7 +7,7 @@ import './RemoveButton.css';
 const RemoveButton = ({ product, decision }) => {
 	const { removeProduct } = useContext(CartContext);
 	return (
-		<>
+		<div className="remove-section">
 			<li>
 				<p>Are You Sure?</p>
 				<p>Remove {product} </p>
@@ -24,7 +24,7 @@ const RemoveButton = ({ product, decision }) => {
 					NO
 				</button>
 			</li>
-		</>
+		</div>
 	);
 };
 

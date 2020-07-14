@@ -18,20 +18,26 @@ const ProductNavCart = () => {
 				<CartConsumer>
 					{({ products }) => (
 						<React.Fragment>
-							{products.map((product, i) => (
-								<li className="nav-cart-li" key={i}>
-									<h3 className="cart-model-title">{product}</h3>
-									<span
-										className="cart-remove-icon"
-										onClick={() => {
-											decisionHandler();
-											setProduct(product);
-										}}
-									>
-										<i className="fas fa-times"></i>
-									</span>
+							{products.length === 0 ? (
+								<li className="nav-cart-li">
+									<h3 className="cart-model-title cart-empty">Your cart is currently empty.</h3>
 								</li>
-							))}
+							) : (
+								products.map((product, i) => (
+									<li className="nav-cart-li" key={i}>
+										<h3 className="cart-model-title">{product}</h3>
+										<span
+											className="cart-remove-icon"
+											onClick={() => {
+												decisionHandler();
+												setProduct(product);
+											}}
+										>
+											<i className="fas fa-times"></i>
+										</span>
+									</li>
+								))
+							)}
 						</React.Fragment>
 					)}
 				</CartConsumer>

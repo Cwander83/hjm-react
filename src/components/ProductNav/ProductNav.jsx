@@ -5,6 +5,8 @@ import './ProductNav.css';
 // import { CartContext } from '../../context/cart-context';
 import Cart from './Cart/Cart';
 import { CategoryConsumer } from '../../context/category-context';
+import MobileNav from './MobileNav/MobileNav';
+//import MobileNav from './MobileNav/MobileNav';
 
 const ProductNav = React.memo(({ visible, handleForm, closeForm }) => {
 	const productValues = [
@@ -19,51 +21,71 @@ const ProductNav = React.memo(({ visible, handleForm, closeForm }) => {
 		{ id: 18, value: 'airMovers', name: 'Air Movers' },
 		{ id: 19, value: 'cleaning', name: 'Cleaning formula / Accessories' },
 	];
+
 	const [activeBtn, setActiveBtn] = React.useState(10);
+
+	// const [width, setWidth] = React.useState(null);
+
+	// React.useEffect(() => {
+	// 	setWidth(window.innerWidth);
+	// }, [width]);
+
+	// console.log(`width: ${width}`);
 
 	React.useEffect(() => () => {}, [activeBtn]);
 
 	return (
 		<CategoryConsumer>
 			{({ categoryFunc }) => (
-				<div className="product-navigator">
-					<ul className="equipment-navigation">
-						<li>
-							<h2 className="equipment-nav-header">Products</h2>
-						</li>
-						{productValues &&
-							productValues.map((button, index) => {
-								return (
-									<li key={button.id}>
-										<button
-											className={`product-btn ${
-												activeBtn === button.id ? 'active-btn' : ''
-											}`}
-											value={button.value}
-											onClick={() => {
-												const passingValue = button.value;
-												setActiveBtn(button.id);
-												closeForm();
-												categoryFunc(passingValue);
-											}}
-										>
-											{button.name}
-										</button>
-									</li>
-								);
-							})}
+				<>
+					
+						<div className="product-navigator">
+							<ul className="equipment-navigation">
+								<li>
+									<h2 className="equipment-nav-header">Products</h2>
+								</li>
+								{productValues &&
+									productValues.map((button, index) => {
+										return (
+											<li key={button.id}>
+												<button
+													className={`product-btn ${
+														activeBtn === button.id ? 'active-btn' : ''
+													}`}
+													value={button.value}
+													onClick={() => {
+														const passingValue = button.value;
+														setActiveBtn(button.id);
+														closeForm();
+														categoryFunc(passingValue);
+													}}
+												>
+													{button.name}
+												</button>
+											</li>
+										);
+									})}
 
-						<li className="products-nav-form-section">
-							<button disabled={visible} onClick={() => handleForm()}>
-								click here for request form
-							</button>
-						</li>
-						<li className="products-nav-form-section">
-							<h2 className="cart">products to purchase:</h2>
-						</li>
-						<Cart />
-					</ul>
-				</div>
+								<li className="products-nav-form-section">
+									<button disabled={visible} onClick={() => handleForm()}>
+										<i className="far fa-envelope"></i>
+										<p className="btn-p">request form</p>
+									</button>
+								</li>
+								<li className="products-nav-form-section">
+									<h2 className="cart-title">products to purchase:</h2>
+								</li>
+								<Cart />
+							</ul>
+						</div>
+					
+						<MobileNav
+							handleForm={handleForm}
+							productValues={productValues}
+							closeForm={closeForm}
+						/>
+					
+				</>
 			)}
 		</CategoryConsumer>
 	);

@@ -46,7 +46,9 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 								<div className="product-col-2">
 									<div className="modal-product-title">
 										<h3 className="modal-product-title-header">
-											{currentProduct.model}
+											{!currentProduct.name
+												? currentProduct.model
+												: currentProduct.name}
 										</h3>
 										<CartConsumer>
 											{({ addProducts }) => (
@@ -75,6 +77,22 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 											</li>
 										))}
 									</ul>
+									<CartConsumer>
+											{({ addProducts }) => (
+												<button
+													onClick={() => {
+														closeModal();
+														addProducts(currentProduct.model);
+													}}
+													className="modal-form-link-1024"
+												>
+													<p>
+														<i className="fas fa-cart-plus"></i>
+														ADD TO CART
+													</p>
+												</button>
+											)}
+										</CartConsumer>
 								</div>
 							</div>
 						);
