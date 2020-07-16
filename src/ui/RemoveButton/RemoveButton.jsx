@@ -8,7 +8,7 @@ const RemoveButton = ({ product, decision }) => {
 	const { removeProduct } = useContext(CartContext);
 	return (
 		<div className="remove-section">
-			<li>
+			<li >
 				<p>Are You Sure?</p>
 				<p>Remove {product} </p>
 				<button

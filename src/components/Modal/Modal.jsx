@@ -32,6 +32,8 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 				{product &&
 					Object.keys(product).map((obj, i) => {
 						let currentProduct = product[obj];
+						console.log(`current model: ${currentProduct.model}`);
+						console.log(`current id: ${ currentProduct.id}`);
 
 						return (
 							<div className="modal-product-body" key={i}>
@@ -78,21 +80,21 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 										))}
 									</ul>
 									<CartConsumer>
-											{({ addProducts }) => (
-												<button
-													onClick={() => {
-														closeModal();
-														addProducts(currentProduct.model);
-													}}
-													className="modal-form-link-1024"
-												>
-													<p>
-														<i className="fas fa-cart-plus"></i>
-														ADD TO CART
-													</p>
-												</button>
-											)}
-										</CartConsumer>
+										{({ addProducts }) => (
+											<button
+												onClick={() => {
+													closeModal();
+													addProducts(currentProduct.model);
+												}}
+												className="modal-form-link-1024"
+											>
+												<p>
+													<i className="fas fa-cart-plus"></i>
+													ADD TO CART
+												</p>
+											</button>
+										)}
+									</CartConsumer>
 								</div>
 							</div>
 						);

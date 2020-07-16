@@ -9,20 +9,21 @@ import './App.css';
 // import provider for context
 import CartContextProvider from './context/cart-context';
 import CategoryProvider from './context/category-context';
-
-// custom hook
-import useForm from './hooks/useForm';
+import ActiveProvider from './context/active-context';
+import FormProvider from './context/form-context';
 
 function App() {
-	const { visible, handleForm, closeForm } = useForm();
-
 	return (
 		<CartContextProvider>
 			<CategoryProvider>
-				<div className="App">
-					<ProductNav handleForm={handleForm} visible={visible} closeForm={closeForm}/>
-					<ProductBody visible={visible} closeForm={closeForm} />
-				</div>
+				<ActiveProvider>
+					<FormProvider>
+						<div className="App">
+							<ProductNav />
+							<ProductBody />
+						</div>
+					</FormProvider>
+				</ActiveProvider>
 			</CategoryProvider>
 		</CartContextProvider>
 	);

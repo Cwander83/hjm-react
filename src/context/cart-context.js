@@ -15,8 +15,12 @@ const CartContextProvider = (props) => {
 	const addProductsHandler = (product) => setProducts(products.concat(product));
 
 	// remove a product
-	const removeProductHandler = (product) =>
-		setProducts(products.filter((item) => item !== product));
+	const removeProductHandler = (product) => {
+		// set var index to first index of item to be deleted
+		let index = products.indexOf(product);
+
+		setProducts(products.filter((_, i) => i !== index));
+	};
 
 	return (
 		<CartContext.Provider
