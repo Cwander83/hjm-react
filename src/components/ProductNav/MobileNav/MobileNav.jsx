@@ -1,12 +1,17 @@
-import React from 'react';
-
-import { CategoryConsumer } from '../../../context/category-context';
+import React, { useContext } from 'react';
 
 import './MobileNav.css';
 
+import { ActiveContext } from '../../../context/active-context';
+import { FormContext } from '../../../context/form-context';
+import { CategoryConsumer } from '../../../context/category-context';
 
+const MobileNav = ({ productValues }) => {
+	// context api
+	const { closeActiveHandler } = useContext(ActiveContext);
+	const { closeFormHandler } = useContext(FormContext);
 
-const MobileNav = ({ handleForm, closeForm, productValues }) => {
+	// component state
 	const [listOpen, setListOpen] = React.useState(false);
 	const [activeBtn, setActiveBtn] = React.useState(10);
 
@@ -17,7 +22,7 @@ const MobileNav = ({ handleForm, closeForm, productValues }) => {
 			{({ categoryFunc }) => (
 				<div className="wrapper">
 					<h3>Products </h3>
-                  
+
 					<span onClick={listHandler} className="mobile-list-button">
 						<p>menu</p>
 						<i
@@ -37,8 +42,9 @@ const MobileNav = ({ handleForm, closeForm, productValues }) => {
 											value={button.value}
 											onClick={() => {
 												const passingValue = button.value;
-												closeForm();
+												closeFormHandler();
 												listHandler();
+												closeActiveHandler();
 												setActiveBtn(button.id);
 												categoryFunc(passingValue);
 											}}
@@ -48,19 +54,6 @@ const MobileNav = ({ handleForm, closeForm, productValues }) => {
 									</li>
 								);
 							})}
-
-						{/* <li>
-							<button
-								className="product-btn mobile-form-btn"
-								onClick={() => {
-									handleForm();
-									listHandler();
-								}}
-							>
-								<i className="far fa-envelope"></i>
-								<p className="btn-p">request form</p>
-							</button>
-						</li> */}
 					</ul>
 				</div>
 			)}

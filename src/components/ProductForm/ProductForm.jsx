@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import moment from 'moment';
+import Swal from 'sweetalert2';
 
 import './ProductForm.css';
 
@@ -10,73 +12,45 @@ import RemoveButton from '../../ui/RemoveButton/RemoveButton';
 const ProductForm = React.memo(() => {
 	const { products } = React.useContext(CartContext);
 
-	const { register, handleSubmit, errors } = useForm();
+	const { register, handleSubmit, errors, reset } = useForm();
 
 	const [decisionBtn, setDecisionBtn] = useState(false);
 	const [currentProduct, setCurrentProduct] = useState(null);
 
 	const decisionHandler = () => setDecisionBtn(!decisionBtn);
 
-	// const [inputs, setInputs] = useState({
-	// 	name: '',
-	// 	phone: '',
-	// 	email: '',
-	// 	products: products,
-	// 	message: '',
-	// });
-
-	// console.log(`inputs: ${inputs.model}`);
-	// const handleOnChange = (event) => {
-	// 	event.persist();
-	// 	setInputs((prev) => ({
-	// 		...prev,
-	// 		[event.target.id]: event.target.value,
-	// 	}));
-	// };
-	/* End input state handling ^^^^ */
-
-	// Server state handling
-	// const [serverState, setServerState] = useState({
-	// 	submitting: false,
-	// 	status: null,
-	// });
-	// const handleServerResponse = (ok, msg) => {
-	// 	setServerState({
-	// 		submitting: false,
-	// 		status: { ok, msg },
-	// 	});
-	// 	if (ok) {
-	// 		setInputs({
-	// 			name: '',
-	// 			phone: '',
-	// 			email: '',
-	// 			products: products,
-	// 			message: '',
-	// 		});
-	// 	}
-	// };
 	const handleOnSubmit = (data, event) => {
+		console.log(`submit`);
 		event.preventDefault();
 		data['models'] = products;
-		console.log(data);
-		//console.log(data, event);
-		//setServerState({ submitting: true });
+		data['date'] = moment().format('MMMM Do YYYY, h:mm:ss a');
+
+		// console.log(`data: ${data}`);
+
 		axios({
 			method: 'POST',
-			url: 'https://formspree.io/chriswandermail@gmail.com',
+			url: 'https://formspree.io/Hjmjanitorialservice@gmail.com',
 			data: data,
-		});
-		// .then((r) => {
-		// 	handleServerResponse(true, 'Thanks!');
-		// })
-		// .catch((r) => {
-		// 	handleServerResponse(false, r.response.data.error);
-		// });
-	};
+		})
+			.then(() => {
+				Swal.fire({
+					icon: 'success',
+					title: 'Request Submitted',
+					text: "We'll be contacting you shortly!",
+				});
+			})
+			.catch(() => {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops..',
+					text: 'Something went wrong!',
+					footer:
+						'Please call &nbsp;<a href="tel:14077774393"> 407-777-4393</a>',
+				});
+			});
 
-	// React.useEffect(() => {
-	// 	return () => {};
-	// }, [inputs, serverState, products]);
+		event.target.reset();
+	};
 
 	return (
 		<div className="form-container">
@@ -115,7 +89,6 @@ const ProductForm = React.memo(() => {
 						id="name"
 						type="text"
 						name="name"
-						// value={inputs.name}
 						placeholder="name"
 						ref={register({
 							required: 'Required',
@@ -131,7 +104,6 @@ const ProductForm = React.memo(() => {
 						id="email"
 						type="email"
 						name="email"
-						// value={inputs.email}
 						placeholder="email"
 						ref={register({
 							required: 'Required',
@@ -146,7 +118,6 @@ const ProductForm = React.memo(() => {
 						id="phone"
 						type="phone"
 						name="phone"
-						// value={inputs.phone}
 						placeholder="phone number"
 						ref={register({
 							required: 'Invalid US Phone Number.',
@@ -163,24 +134,16 @@ const ProductForm = React.memo(() => {
 						id="message"
 						name="message"
 						type="text"
-						// value={inputs.message}
 						placeholder="message"
 						ref={register}
 					/>
-					<span
-						className="product-form-btn"
-						type="submit"
-						//disabled={serverState.submitting}
-					>
+					<button className="product-form-btn" type="submit">
 						<i className="far fa-paper-plane"></i>
 						<h3>submit form</h3>
-					</span>
-
-					{/* {serverState.status && (
-						<p className={!serverState.status.ok ? 'errorMsg' : ''}>
-							{serverState.status.msg}
-						</p>
-					)} */}
+					</button>
+					<p className="reset-btn" type="reset" onClick={reset}>
+						clear form
+					</p>
 				</form>
 			</div>
 		</div>
