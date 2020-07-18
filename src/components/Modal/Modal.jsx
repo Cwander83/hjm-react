@@ -32,8 +32,7 @@ const ProductModal = React.memo(({ open, closeModal, product }) => {
 				{product &&
 					Object.keys(product).map((obj, i) => {
 						let currentProduct = product[obj];
-						console.log(`current model: ${currentProduct.model}`);
-						console.log(`current id: ${ currentProduct.id}`);
+			
 
 						return (
 							<div className="modal-product-body" key={i}>

@@ -22,7 +22,7 @@ const ProductBody = React.memo(() => {
 		setCurrentCategory(category);
 	}, [category, form]);
 
-	console.log(`body form: ${form}`);
+	
 
 	return (
 		<div className="product-body">

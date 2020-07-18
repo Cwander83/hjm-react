@@ -8,7 +8,7 @@ export const CategoryContext = React.createContext({
 // Provider
 const CategoryProvider = (props) => {
 	const [category, setCategory] = React.useState('uprightVacuums');
-	console.log(`category: ${category}`);
+	
 	const categoryHandler = (value) => {
 		setCategory(value);
 	};

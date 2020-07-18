@@ -9,7 +9,7 @@ export const ActiveContext = React.createContext({
 // Provider
 const ActiveProvider = (props) => {
 	const [active, setActive] = React.useState(false);
-	console.log(`active: ${active}`);
+	
 	const activeHandler = () => setActive(!active);
 
 	const closeActiveHandler = () => 

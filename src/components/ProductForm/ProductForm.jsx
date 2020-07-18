@@ -20,7 +20,7 @@ const ProductForm = React.memo(() => {
 	const decisionHandler = () => setDecisionBtn(!decisionBtn);
 
 	const handleOnSubmit = (data, event) => {
-		console.log(`submit`);
+		
 		event.preventDefault();
 		data['models'] = products;
 		data['date'] = moment().format('MMMM Do YYYY, h:mm:ss a');

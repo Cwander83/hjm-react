@@ -11,7 +11,7 @@ import { ActiveContext } from '../../../context/active-context';
 const Products = React.memo(({ data }) => {
 	const { active, activeHandler } = useContext(ActiveContext);
 	const [isDesktop, setDesktop] = React.useState(window.innerWidth > 475);
-	console.log(`isDesktop: ${isDesktop}`);
+	
 	const updateMedia = () => {
 		setDesktop(window.innerWidth > 475);
 	};
